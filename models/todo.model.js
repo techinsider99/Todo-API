@@ -12,6 +12,12 @@ let TodoSchema = new Schema({
     },
     isCompleted: {
         type: Boolean
+    },
+    createdAt: {
+        type: Date
+    },
+    updatedAt: {
+        type: Date
     }
 })
 

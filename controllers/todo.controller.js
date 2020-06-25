@@ -18,7 +18,9 @@ const createTodo = (req, res) => {
         const todo = new Todo({
             id: generateId(),
             title: req.body.title,
-            isCompleted: false
+            isCompleted: false,
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString()
         })
         todo.save(err => {
             if(err) {
@@ -49,7 +51,8 @@ const toggleTodo = async (req, res) => {
             },
             {
                 $set: {
-                    isCompleted: !todo.isCompleted
+                    isCompleted: !todo.isCompleted,
+                    updatedAt: new Date().toISOString()
                 }
             }
         , err => {
