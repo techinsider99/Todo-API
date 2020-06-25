@@ -1,5 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const morgan = require('morgan');
 const cors = require('cors')
 const app = express()
 const { URI } = require('./config')
@@ -18,6 +19,7 @@ mongoose.connect(URI, options)
     console.log('MongoDB Connection error.' + err)
 })
 
+app.use(morgan('tiny'))
 app.use(cors())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())

@@ -1,7 +1,7 @@
 const Todo = require('../models/todo.model')
 const { v4: generateId } = require('uuid')
 
-exports.getAllTodos = async (req, res) => {
+const getAllTodos = async (req, res) => {
     const todos = await Todo.find(err => {
         if (err) {
             res.json({
@@ -13,7 +13,7 @@ exports.getAllTodos = async (req, res) => {
     res.status(200).json(todos)
 }
 
-exports.createTodo = (req, res) => {
+const createTodo = (req, res) => {
     if (req.body.title) {
         const todo = new Todo({
             id: generateId(),
@@ -38,7 +38,7 @@ exports.createTodo = (req, res) => {
     }
 }
 
-exports.toggleTodo = async (req, res) => {
+const toggleTodo = async (req, res) => {
     if(req.body.id) {
         let todo = await Todo.findOne({
             "id": req.body.id
@@ -70,7 +70,7 @@ exports.toggleTodo = async (req, res) => {
     }
 }
 
-exports.deleteTodo = (req, res) => {
+const deleteTodo = (req, res) => {
     if(req.body.id) {
         Todo.deleteOne({
             "id": req.body.id
@@ -90,4 +90,11 @@ exports.deleteTodo = (req, res) => {
             "error": "ID is required"
         })
     }
+}
+
+module.exports = {
+    getAllTodos,
+    createTodo,
+    toggleTodo,
+    deleteTodo
 }
