@@ -16,7 +16,7 @@ mongoose.connect(URI, options)
 .then(() => {
     console.log('Connected to MongoDB')
 }).catch(err => {
-    console.log('MongoDB Connection error.' + err)
+    console.log('MongoDB Connection error. ' + err)
 })
 
 app.use(morgan('tiny'))

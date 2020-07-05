@@ -42,9 +42,6 @@ const createTodo = (req, res) => {
 
 const toggleTodo = async (req, res) => {
     if(req.body.id) {
-        let todo = await Todo.findOne({
-            "id": req.body.id
-        })
         Todo.updateOne(
             {
                 "id": req.body.id
@@ -95,9 +92,51 @@ const deleteTodo = (req, res) => {
     }
 }
 
+const addNote = async (req, res) => {
+    if(req.body.id) {
+        if(req.body.description) {
+            const todo = await Todo.findOne({
+                "id": req.body.id
+            })
+            Todo.updateOne(
+                {
+                    "id": req.body.id
+                },
+                {
+                    $push: {
+                        notes: {
+                            id: generateId(),
+                            description: req.body.description
+                        }
+                    }
+                }
+            , err => {
+                if(err) {
+                    res.json({
+                        "error": err
+                    })
+                } else {
+                    res.status(200).json({
+                        "message": "success" 
+                    })
+                }
+            })
+        } else {
+            res.status(400).json({
+                "error": "Note description is required"
+            })
+        }
+    } else {
+        res.status(400).json({
+            "error": "Todo ID is required"
+        })
+    }
+}
+
 module.exports = {
     getAllTodos,
     createTodo,
     toggleTodo,
-    deleteTodo
+    deleteTodo,
+    addNote
 }
