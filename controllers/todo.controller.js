@@ -103,6 +103,9 @@ const addNote = async (req, res) => {
                     "id": req.body.id
                 },
                 {
+                    $set: {
+                        updatedAt: new Date().toISOString()
+                    },
                     $push: {
                         notes: {
                             id: generateId(),
@@ -146,6 +149,9 @@ const deleteNote = async (req, res) => {
                         "id": req.body.todoId
                     },
                     {
+                        $set: {
+                            updatedAt: new Date().toISOString()
+                        },
                         $pull: {
                             notes: {
                                 "id": req.body.noteId

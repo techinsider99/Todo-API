@@ -10,10 +10,17 @@ let TodoSchema = new Schema({
         required: true,
         maxlength: 100
     },
-    notes: {
-        type: Array,
-        default: []
-    },
+    notes: [
+        {
+            _id: false,
+            id: {
+                type: String
+            },
+            description: {
+                type: String
+            },
+        }
+    ],
     isCompleted: {
         type: Boolean
     },
