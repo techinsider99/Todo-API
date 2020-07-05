@@ -139,7 +139,6 @@ const deleteNote = async (req, res) => {
             const todo = await Todo.findOne({
                 "id": req.body.todoId
             })
-            console.log(todo)
             const noteExists = todo.notes.filter(note => note.id === req.body.noteId).length > 0
             if (noteExists) {
                 Todo.updateOne(
