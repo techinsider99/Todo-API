@@ -5,6 +5,7 @@ const cors = require('cors')
 const app = express()
 const { URI } = require('./config')
 const todoHandler = require('./routes/todo.route')
+const captchaHandler = require('./routes/captcha.route')
 
 const options = {
     useNewUrlParser: true,
@@ -24,6 +25,7 @@ app.use(cors())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use('/api/todo', todoHandler)
+app.use('/captcha', captchaHandler)
 
 const PORT = process.env.PORT || 5000
 
